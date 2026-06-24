@@ -8,6 +8,7 @@ export class LoginPage extends BasePage {
     private loginButton = this.page.locator('[data-qa="login-button"]');
     private logoutlink = this.page.locator('a[href="/logout"]');
     private loggedInAsText = this.page.locator('a:has-text("Logged in as")');
+    private loginErrorMessage = this.page.locator('p:has-text("Your email or password is incorrect!")');
     
     async login(email: string, password: string) {
         await this.loginEmail.fill(email);
@@ -22,5 +23,10 @@ export class LoginPage extends BasePage {
     async verifyLoggedInAs(userName: string) {
         await expect (this.loggedInAsText).toContainText(userName);
     }
+
+    async verifyInvalidLoginError(){
+        await expect(this.loginErrorMessage).toHaveText('Your email or password is incorrect!');
+    }
+
 
 }
