@@ -1,20 +1,21 @@
+import { User } from "../test-data/interfaces/user";
 import { BasePage } from "./BasePage";
 
 export class AccountInformationPage extends BasePage {
-    private mrRadio = this.locator('#id_gender1');
-    private passwordInput = this.locator('#password');
-    private daysDropdown = this.locator('#days');
-    private monthsDropdown = this.locator('#months');
-    private yearsDropdown = this.locator('#years')
-    private firstNameInput = this.locator('#first_name');
-    private lastNameInput = this.locator('#last_name');
-    private addressInput = this.locator('#address1');
-    private countryDropdown = this.locator('#country')
-    private stateInput = this.locator('#state');
-    private cityInput = this.locator('#city');
-    private zipCodeInput = this.locator('#zipcode');
-    private mobileNumberInput = this.locator('#mobile_number');
-    private createAccountButton = this.locator('[data-qa="create-account"]');
+    private mrRadio = this.page.locator('#id_gender1');
+    private passwordInput = this.page.locator('#password');
+    private daysDropdown = this.page.locator('#days');
+    private monthsDropdown = this.page.locator('#months');
+    private yearsDropdown = this.page.locator('#years')
+    private firstNameInput = this.page.locator('#first_name');
+    private lastNameInput = this.page.locator('#last_name');
+    private addressInput = this.page.locator('#address1');
+    private countryDropdown = this.page.locator('#country')
+    private stateInput = this.page.locator('#state');
+    private cityInput = this.page.locator('#city');
+    private zipCodeInput = this.page.locator('#zipcode');
+    private mobileNumberInput = this.page.locator('#mobile_number');
+    private createAccountButton = this.page.locator('[data-qa="create-account"]');
     
 
     async fillAccountInformation(user: User) {
