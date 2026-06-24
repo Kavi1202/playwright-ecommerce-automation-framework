@@ -1,6 +1,5 @@
 import { test,expect } from "@playwright/test";
 import { HomePage } from "../../pages/HomePage";
-import { userData } from "../../test-data/userData";
 import { SignupPage } from "../../pages/SignupPage";
 import { AccountInformationPage } from "../../pages/AccountInformationPage";
 import { AccountCreatedPage } from "../../pages/AccountCreatedPage";
