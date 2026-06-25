@@ -20,11 +20,7 @@
     "dotenv": "^17.4.2"
   },
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "types": [
-      "node",
-      "@playwright/test"
-    ]
+    "types": ["node", "jest", "playwright"]
   }
+
 }
