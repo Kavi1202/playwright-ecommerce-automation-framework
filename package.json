@@ -10,7 +10,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.61.0",
-    "@types/node": "^26.0.0"
+    "@types/node": "^26.0.1"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.12.1",
@@ -18,5 +18,13 @@
     "allure-playwright": "^3.10.1",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2"
+  },
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "types": [
+      "node",
+      "@playwright/test"
+    ]
   }
 }
