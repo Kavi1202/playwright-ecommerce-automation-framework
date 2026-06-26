@@ -15,6 +15,11 @@ export class ProductsPage extends BasePage{
     readonly condition: Locator;
     readonly brand: Locator;
 
+    readonly searchInput: Locator;
+    readonly searchButton: Locator;
+    readonly searchedProductsHeading: Locator;
+    readonly searchedProducts: Locator;
+
     constructor(page: Page){
         super(page);
 
@@ -30,6 +35,13 @@ export class ProductsPage extends BasePage{
         this.availability = this.productDetailContainer.locator('p').filter({hasText: 'Availability:' });
         this.condition = this.productDetailContainer.locator('p').filter({hasText: 'Condition:' });
         this.brand = this.productDetailContainer.locator('p').filter({hasText: 'Brand:' });
+
+        this.searchInput = page.locator('#search_product');
+        this.searchButton = page.locator('#submit_search');
+        
+        this.searchedProductsHeading = page.getByRole('heading',{name:/searched products/i});
+        this.searchedProducts = page.locator('.features_items .productinfo p');
+        
     }
 
     async openHomePage(){
@@ -69,4 +81,19 @@ export class ProductsPage extends BasePage{
         await expect(this.brand).toBeVisible();
     }
 
+    async searchProduct(productName: string){
+        await this.searchInput.fill(productName);
+        await this.searchButton.click();
+    }
+
+    async verifySearchResults(productName: string){
+        await expect(this.searchedProductsHeading).toBeVisible();
+        
+        const count = await this.searchedProducts.count();
+        expect(count).toBeGreaterThan(0);
+
+        for(let i=0; i< count; i++){
+            await expect(this.searchedProducts.nth(i)).toContainText(productName);
+        }
+    }
 }
