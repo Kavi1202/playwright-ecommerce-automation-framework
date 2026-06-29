@@ -26,7 +26,7 @@ export class AccountInformationPage extends BasePage {
         await this.yearsDropdown.selectOption({ value: '2000' });
         await this.firstNameInput.fill(user.firstName);
         await this.lastNameInput.fill(user.lastName);
-        await this.addressInput.fill(user.address);
+        await this.addressInput.fill(user.address1);
         await this.countryDropdown.selectOption({ label: user.country });
         await this.stateInput.fill(user.state);
         await this.cityInput.fill(user.city);
