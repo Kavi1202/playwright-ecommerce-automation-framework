@@ -6,15 +6,18 @@ export class HomePage extends BasePage{
 
     readonly continueShoppingButton;
     readonly viewCartLink;
+    readonly firstViewProductButton;
+    readonly signupLoginLink;
     
     constructor(page: Page){
         super(page);
 
         this.continueShoppingButton = page.getByRole('button',{name: 'Continue Shopping'});
         this.viewCartLink = page.getByRole('link',{name: 'View Cart'});
+        this.firstViewProductButton = page.locator('a[href="/product_details/1"]');
+        this.signupLoginLink = page.locator('a[href="/login"]');
     }
 
-    private signupLoginLink = this.page.locator('a[href="/login"]');
     
     async clickSignupLogin() {
         await this.signupLoginLink.click();
@@ -44,5 +47,9 @@ export class HomePage extends BasePage{
     async openCart(){
         await expect(this.viewCartLink).toBeVisible();
         await this.viewCartLink.click();
+    }
+
+    async openFirstProduct(){
+        await this.firstViewProductButton.click();
     }
 }
