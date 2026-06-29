@@ -6,6 +6,8 @@ export class CartPage extends BasePage{
     readonly cartLink: Locator;
     readonly cartRows;
     readonly firstProductQuantity;
+    private deleteButton;
+    private emptyCartMessage; 
     
     constructor(page: Page){
         super(page);
@@ -13,6 +15,8 @@ export class CartPage extends BasePage{
         this.cartLink = page.getByRole('link',{name:/cart/i});
         this.cartRows = page.locator('#cart_info tbody tr');
         this.firstProductQuantity = page.locator('.cart_quantity button').first();
+        this.deleteButton = page.locator('.cart_quantity_delete');
+        this.emptyCartMessage = page.locator('#empty_cart');
     }
 
     async openHomePage(){
@@ -30,5 +34,14 @@ export class CartPage extends BasePage{
 
     async verifyProductQuantity(expected: number){
         await expect(this.firstProductQuantity).toHaveText(expected.toString());
+    }
+
+    async removeProduct(){
+        await this.deleteButton.first().click();
+    }
+
+    async verifyCartIsEmpty(){
+        await expect(this.cartRows).toHaveCount(0);
+        await expect(this.emptyCartMessage).toBeVisible();
     }
 }
