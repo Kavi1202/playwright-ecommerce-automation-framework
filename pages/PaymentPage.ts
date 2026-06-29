@@ -44,6 +44,5 @@ export class PaymentPage extends BasePage{
     async verifyOrderPlaced(){
         await expect(this.successMessage).toHaveText('Order Placed!');
     }
-
-
+    
 }
