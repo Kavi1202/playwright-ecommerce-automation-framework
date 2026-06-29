@@ -34,7 +34,7 @@ export class CheckoutPage extends BasePage {
         await expect(this.reviewOrderHeading).toBeVisible();
     }
 
-    async enterCommet(comment: string){
+    async enterComment(comment: string){
         await this.commentBox.fill(comment);
     }
 
