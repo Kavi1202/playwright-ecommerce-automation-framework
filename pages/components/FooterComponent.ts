@@ -9,7 +9,7 @@ export class FooterComponent{
 
     constructor(page: Page){
         this.page = page;
-        this.subscriptionHeading = page.getByRole('heading', { name: 'Subscription' })
+        this.subscriptionHeading = page.getByRole('heading', { name: 'Subscription' });
         this.emailInput = page.getByRole('textbox', { name: 'Your email address' });
         this.subscribeButton = page.locator('#subscribe');
         this.successMessage = page.locator('#success-subscribe .alert-success');
