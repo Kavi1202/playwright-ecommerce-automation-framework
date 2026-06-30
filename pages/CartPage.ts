@@ -12,7 +12,7 @@ export class CartPage extends BasePage{
     constructor(page: Page){
         super(page);
 
-        this.cartLink = page.getByRole('link',{name:/cart/i});
+        this.cartLink = page.locator('header a[href="/view_cart"]');
         this.cartRows = page.locator('#cart_info tbody tr');
         this.firstProductQuantity = page.locator('.cart_quantity button').first();
         this.deleteButton = page.locator('.cart_quantity_delete');

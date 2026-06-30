@@ -15,7 +15,8 @@ export class HomePage extends BasePage{
         this.continueShoppingButton = page.getByRole('button',{name: 'Continue Shopping'});
         this.viewCartLink = page.getByRole('link',{name: 'View Cart'});
         this.firstViewProductButton = page.locator('a[href="/product_details/1"]');
-        this.signupLoginLink = page.locator('a[href="/login"]');
+        this.signupLoginLink = this.page
+    .getByRole('link', { name: /signup\s*\/\s*login/i });
     }
 
     
@@ -52,4 +53,9 @@ export class HomePage extends BasePage{
     async openFirstProduct(){
         await this.firstViewProductButton.click();
     }
+
+    async openCartFromPopup() {
+    await expect(this.viewCartLink).toBeVisible();
+    await this.viewCartLink.click();
+}
 }

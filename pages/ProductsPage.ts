@@ -24,6 +24,8 @@ export class ProductsPage extends BasePage{
     readonly poloBrand: Locator;
     readonly hmBrand: Locator;
     readonly brandTitle: Locator;
+    readonly productCards: Locator;
+    readonly continueShoppingButton: Locator;
 
 
     constructor(page: Page){
@@ -51,7 +53,11 @@ export class ProductsPage extends BasePage{
         this.brandsHeading = page.getByRole('heading',{name:'Brands'});
         this.poloBrand = page.locator('a[href="/brand_products/Polo"]');
         this.hmBrand = page.locator('a[href="/brand_products/H&M"]');
-        this.brandTitle = page.locator('.features_items h2.title');        
+        this.brandTitle = page.locator('.features_items h2.title');
+        this.productCards = page.locator('.features_items .product-image-wrapper');
+        this.continueShoppingButton = page.getByRole('button',{name: /continue shopping/i});
+
+        
     }
 
     async openHomePage(){
@@ -133,5 +139,34 @@ export class ProductsPage extends BasePage{
     async verifyHMProducts(){
         await expect(this.brandTitle).toContainText('Brand - H&M Products');
     }
+
+    async addAllSearchedProductsToCart(){
+        const cards = this.page.locator('.features_items .product-image-wrapper');
+        const count = await cards.count();
+
+        for(let i =0; i<count; i++){
+            const card = this.productCards.nth(i);
+
+            await card.scrollIntoViewIfNeeded();
+            await card.hover();
+            const button = card.locator('.product-overlay .add-to-cart');
+            await expect(button).toBeVisible();
+            await button.click();
+
+
+            if(i < count -1){
+                await expect(this.continueShoppingButton).toBeVisible();
+                await this.continueShoppingButton.click();
+            }
+        }
+    }
+
+    async getSearchResultCount(){
+        return await this.searchedProducts.count();
+    }
+
+    
+
+
 
 }
