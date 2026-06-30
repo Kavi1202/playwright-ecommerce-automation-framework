@@ -20,6 +20,12 @@ export class ProductsPage extends BasePage{
     readonly searchedProductsHeading: Locator;
     readonly searchedProducts: Locator;
 
+    readonly brandsHeading: Locator;
+    readonly poloBrand: Locator;
+    readonly hmBrand: Locator;
+    readonly brandTitle: Locator;
+
+
     constructor(page: Page){
         super(page);
 
@@ -41,7 +47,11 @@ export class ProductsPage extends BasePage{
         
         this.searchedProductsHeading = page.getByRole('heading',{name:/searched products/i});
         this.searchedProducts = page.locator('.features_items .productinfo p');
-        
+
+        this.brandsHeading = page.getByRole('heading',{name:'Brands'});
+        this.poloBrand = page.locator('a[href="/brand_products/Polo"]');
+        this.hmBrand = page.locator('a[href="/brand_products/H&M"]');
+        this.brandTitle = page.locator('.features_items h2.title');        
     }
 
     async openHomePage(){
@@ -96,4 +106,32 @@ export class ProductsPage extends BasePage{
             await expect(this.searchedProducts.nth(i)).toContainText(productName);
         }
     }
+
+    async openProducts(){
+        await this.productsLink.click();
+        await expect(this.page).toHaveURL(/products/);
+    }
+
+    async verifyBrandsVisible(){
+        await expect(this.brandsHeading).toBeVisible();
+    }
+    
+    async openPoloBrand(){
+        await this.poloBrand.click();
+        await expect(this.page).toHaveURL(/brand_products\/Polo/);
+    }
+    
+    async verifyPoloProducts(){
+        await expect(this.brandTitle).toContainText('Brand - Polo Products');
+    }
+    
+    async openHMBrand(){
+        await this.hmBrand.click();
+        await expect(this.page).toHaveURL(/brand_products\/H&M/);
+    }
+
+    async verifyHMProducts(){
+        await expect(this.brandTitle).toContainText('Brand - H&M Products');
+    }
+
 }
