@@ -8,6 +8,9 @@ export class HomePage extends BasePage{
     readonly viewCartLink;
     readonly firstViewProductButton;
     readonly signupLoginLink;
+    readonly recommendedItemsHeading;
+    readonly recommendedProduct;
+    readonly recommendedAddToCart;
     
     constructor(page: Page){
         super(page);
@@ -15,8 +18,10 @@ export class HomePage extends BasePage{
         this.continueShoppingButton = page.getByRole('button',{name: 'Continue Shopping'});
         this.viewCartLink = page.getByRole('link',{name: 'View Cart'});
         this.firstViewProductButton = page.locator('a[href="/product_details/1"]');
-        this.signupLoginLink = this.page
-    .getByRole('link', { name: /signup\s*\/\s*login/i });
+        this.signupLoginLink = this.page.getByRole('link', { name: /signup\s*\/\s*login/i });
+        this.recommendedItemsHeading = this.page.getByText('RECOMMENDED ITEMS');
+        this.recommendedProduct = this.page.locator('.recommended_items .product-image-wrapper').first();
+        this.recommendedAddToCart = this.recommendedProduct.locator('.add-to-cart');  
     }
 
     
@@ -55,7 +60,22 @@ export class HomePage extends BasePage{
     }
 
     async openCartFromPopup() {
-    await expect(this.viewCartLink).toBeVisible();
-    await this.viewCartLink.click();
-}
+        await expect(this.viewCartLink).toBeVisible();
+        await this.viewCartLink.click();
+    }
+
+    async scrollToBottom(){
+        await this.page.evaluate(()=> window.scrollTo(0,document.body.scrollHeight));
+    }
+
+    async verifyRecommendedItemsVisible(){
+        await expect(this.recommendedItemsHeading).toBeVisible();
+    }
+
+    async addRecommendedItemToCart(){
+        await this.recommendedProduct.scrollIntoViewIfNeeded();
+        await this.recommendedProduct.hover();
+        await this.recommendedAddToCart.click();
+    }
+
 }
