@@ -27,8 +27,8 @@ export class HomePage extends BasePage{
         this.recommendedAddToCart = this.recommendedProduct.locator('.add-to-cart');
         this.subscriptionHeading=page.getByRole('heading',{name:/subscription/i});
         this.scrollUpButton = page.locator('#scrollUp');
-        this.homeBanner = page.getByText('Full-Fledged practice website for Automation Engineers');
-
+        this.homeBanner = page.getByRole('heading',{name:/Full-Fledged practice website/i}).first();
+        
     }
 
     
@@ -97,6 +97,9 @@ export class HomePage extends BasePage{
     async verifyHomeBannerVisible(){
         await expect(this.homeBanner).toBeVisible();
     }
-    
+
+    async scrollToTop() {
+        await this.page.evaluate(() => window.scrollTo(0, 0));
+    }
 
 }
