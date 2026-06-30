@@ -14,3 +14,4 @@ test('TC22 Add to cart from Recommended Items',async ({page})=>{
     await cartPage.verifyProductsCount(1);
 
 });
+

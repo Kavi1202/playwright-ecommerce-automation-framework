@@ -25,6 +25,7 @@ async setQuantity(quantity: number){
 
 async addToCart(){
     await this.addToCartButton.click();
+    
 }
 
 async viewCart() {

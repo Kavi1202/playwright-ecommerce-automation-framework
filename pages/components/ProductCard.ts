@@ -28,7 +28,7 @@ export class ProductCard{
        await expect(this.addToCartButton).toBeVisible();
        await this.addToCartButton.click();
        await expect(this.page.getByText('Added!')).toBeVisible();
-       });
+       }).toPass();
     }
 
     async verifyVisible(){

@@ -11,8 +11,7 @@ test('TC09 Search Product', async ({page})=>{
     await productsPage.verifyAllProductsPageLoaded();
 
     await productsPage.searchProduct(productName);
-    
-    await productsPage.verifySearchResults(productName);
 
+    await productsPage.verifySearchResults(productName);
 
 });
