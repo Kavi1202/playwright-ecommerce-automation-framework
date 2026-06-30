@@ -11,6 +11,9 @@ export class HomePage extends BasePage{
     readonly recommendedItemsHeading;
     readonly recommendedProduct;
     readonly recommendedAddToCart;
+    readonly subscriptionHeading;
+    readonly scrollUpButton;
+    readonly homeBanner;
     
     constructor(page: Page){
         super(page);
@@ -21,7 +24,11 @@ export class HomePage extends BasePage{
         this.signupLoginLink = this.page.getByRole('link', { name: /signup\s*\/\s*login/i });
         this.recommendedItemsHeading = this.page.getByText('RECOMMENDED ITEMS');
         this.recommendedProduct = this.page.locator('.recommended_items .product-image-wrapper').first();
-        this.recommendedAddToCart = this.recommendedProduct.locator('.add-to-cart');  
+        this.recommendedAddToCart = this.recommendedProduct.locator('.add-to-cart');
+        this.subscriptionHeading=page.getByRole('heading',{name:/subscription/i});
+        this.scrollUpButton = page.locator('#scrollUp');
+        this.homeBanner = page.getByText('Full-Fledged practice website for Automation Engineers');
+
     }
 
     
@@ -77,5 +84,19 @@ export class HomePage extends BasePage{
         await this.recommendedProduct.hover();
         await this.recommendedAddToCart.click();
     }
+
+    async verifySubscriptionVisible(){
+        await expect(this.subscriptionHeading).toBeVisible();
+    }
+
+    async clickScrollUpButton(){
+        await expect(this.scrollUpButton).toBeVisible();
+        await this.scrollUpButton.click();
+    }
+
+    async verifyHomeBannerVisible(){
+        await expect(this.homeBanner).toBeVisible();
+    }
+    
 
 }
