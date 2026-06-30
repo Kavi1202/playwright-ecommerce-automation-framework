@@ -115,7 +115,8 @@ export class ProductsPage extends BasePage{
 
     async openProducts(){
         await this.productsLink.click();
-        await expect(this.page).toHaveURL(/products/);
+        await expect(this.page).toHaveURL(/\/product/);
+        await expect(this.allProductsTitle).toBeVisible();
     }
 
     async verifyBrandsVisible(){
